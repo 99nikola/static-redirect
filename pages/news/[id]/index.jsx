@@ -1,22 +1,12 @@
 const NewsItem = (props) => {
-    console.log(props);
-    return <div>NewsItem</div>;
+    return <div>{props.news.slug}</div>;
 };
 
 export const getStaticProps = (context) => {
-    const id = context.params.id;
-
-    if (id == 0)
-        return ({
-            redirect: {
-                destination: "/news/1"
-            }
-        });
-
     return ({
         props: {
             news: {
-                id: 1
+                slug: context.params.id
             }
         }
     })
@@ -28,13 +18,15 @@ export const getStaticPaths = () => {
         paths: [
             {
                 params: {
-                    id: "0"
-                }
+                    id: "first-news"
+                },
+                locale: "en"
             },
             {
                 params: {
-                    id: "1"
-                }
+                    id: "prva-novost"
+                },
+                locale: "latn"
             }
         ],
         fallback: false
